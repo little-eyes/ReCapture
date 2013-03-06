@@ -14,13 +14,13 @@ public class ApplicationTriggers {
 	public final static String APP_FACEBOOK_PACKAGE_NAME = "com.facebook.katana";
 	public final static String APP_FACEBOOK_CLASS_NAME = null;
 	
-	public final static String APP_GMAIL_PACKAGE_NAME = "com.android.gmail";
+	public final static String APP_GMAIL_PACKAGE_NAME = "com.google.android.gm";
 	public final static String APP_GMAIL_CLASS_NAME = null;
 	
 	public final static String APP_TWITTER_PACKAGE_NAME = "com.android.twitter";
 	public final static String APP_TWITTER_CLASS_NAME = null;
 	
-	public final static String APP_PHONE_PACKAGE_NAME = "com.android.phone";
+	public final static String APP_PHONE_PACKAGE_NAME = "com.android.providers.telephony";
 	public final static String APP_PHONE_CLASS_NAME = null;
 	
 	public final static String APP_SMS_PACKAGE_NAME = "com.android.sms";
@@ -28,6 +28,9 @@ public class ApplicationTriggers {
 	
 	public final static String APP_MAPS_PACKAGE_NAME = "com.android.maps";
 	public final static String APP_MAPS_CLASS_NAME = null;
+	
+	public final static String APP_AMAZON_PACKAGE_NAME = "com.amazon.windowshop";
+	public final static String APP_AMAZON_CLASS_NAME = null;
 	
 	/*
 	 * Variable stores which application this trigger is for.
@@ -51,7 +54,7 @@ public class ApplicationTriggers {
 	/*
 	 * Launch the application by package name only or package name + main activity class.
 	 * */
-	boolean triggerApplication() {
+	public boolean triggerApplication() {
 		if (_ApplicationClassName_ != null) {
 			Intent intent = new Intent();
 			intent.setComponent(new ComponentName(_ApplicationPackageName_, _ApplicationClassName_));
