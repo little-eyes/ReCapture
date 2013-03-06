@@ -1,5 +1,7 @@
 package com.android.recapture.lib;
 
+import java.util.Timer;
+
 import android.content.Context;
 
 public class ApplicationEvent {
@@ -14,6 +16,8 @@ public class ApplicationEvent {
 	private static ApplicationTriggers _ApplicationTrigger_;
 	private static TouchGenerator _Toucher_;
 	private static SystemMonitor _Monitor_;
+	
+	private static Timer _ScheduleTimer_;
 	
 	public ApplicationEvent(
 			Context env, 
@@ -36,6 +40,7 @@ public class ApplicationEvent {
 	 * TODO: make the execution dynamic configurable.
 	 * */
 	public void execute() {
-		
+		// trigger the event.
+		_ApplicationTrigger_.triggerApplication();
 	}
 }
