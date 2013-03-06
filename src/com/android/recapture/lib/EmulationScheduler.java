@@ -3,6 +3,7 @@ package com.android.recapture.lib;
 import java.util.ArrayList;
 
 import android.content.Context;
+import android.util.Log;
 
 
 public class EmulationScheduler implements Runnable {
@@ -16,6 +17,8 @@ public class EmulationScheduler implements Runnable {
 	private static ArrayList <TraceItem> _TraceData_;
 	private static Context _ApplicationEnvironment_;
 	private static int _EmulationProgress_ = 0;
+	private static ApplicationEvent _Event_;
+	private static ApplicationTriggers _Trigger_;
 	
 	public EmulationScheduler(ArrayList <TraceItem> data, Context env) {
 		_TraceData_ = data;
@@ -30,17 +33,21 @@ public class EmulationScheduler implements Runnable {
 			
 			// prepare the event.
 			TraceItem item = _TraceData_.get(_EmulationProgress_);
-			ApplicationTriggers trigger = new ApplicationTriggers(
+			Log.d("ReCapture", item.ApplicationName);
+			_Trigger_ = new ApplicationTriggers(
 					ApplicationTriggers.getPackageNameByApplicationName(item.ApplicationName), 
 					_ApplicationEnvironment_);
-			ApplicationEvent event = new ApplicationEvent(_ApplicationEnvironment_, trigger, null, null);
+			// TODO: integrate the monitors and toucher
+			_Event_ = new ApplicationEvent(_ApplicationEnvironment_, _Trigger_, null, null);
 			
 			// execute the event.
-			event.execute();
+			_Event_.execute();
+			
+			++_EmulationProgress_;
 			
 			// sleep for a certain time.
 			try {
-				wait(ConfigurationManager.APP_EVENT_SLEEP_DURATION);
+				Thread.sleep(ConfigurationManager.APP_EVENT_SLEEP_DURATION);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}

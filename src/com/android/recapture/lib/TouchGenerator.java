@@ -1,6 +1,10 @@
 package com.android.recapture.lib;
 
+import java.util.List;
+
+import android.app.ActivityManager;
 import android.content.Context;
+import android.view.View;
 
 public class TouchGenerator {
 /*
@@ -9,9 +13,14 @@ public class TouchGenerator {
  * app currently active.
  * */
 	private static Context _ApplicationEnvironment_;
+	private View _CurrentView_;
+	private ActivityManager _ActivityManager_;
 	
 	public TouchGenerator(Context env) {
 		_ApplicationEnvironment_ = env;
+		_ActivityManager_ = (ActivityManager) _ApplicationEnvironment_.getSystemService(
+				_ApplicationEnvironment_.ACTIVITY_SERVICE);
+		List< ActivityManager.RunningTaskInfo > taskInfo = _ActivityManager_.getRunningTasks(1); 
 	}
 	
 	// click event.

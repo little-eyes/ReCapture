@@ -21,17 +21,17 @@ public class ApplicationTriggers {
 	public final static String APP_TWITTER_PACKAGE_NAME = "com.twitter.android";
 	public final static String APP_TWITTER_CLASS_NAME = null;
 	
-	public final static String APP_PHONE_PACKAGE_NAME = "com.android.providers.telephony";
+	public final static String APP_PHONE_PACKAGE_NAME = "com.android.phone";
 	public final static String APP_PHONE_CLASS_NAME = null;
 	
 	// TODO: figure out sms.
-	public final static String APP_SMS_PACKAGE_NAME = "com.android.sms";
+	public final static String APP_SMS_PACKAGE_NAME = "com.android.mms";
 	public final static String APP_SMS_CLASS_NAME = null;
 	
 	public final static String APP_MAPS_PACKAGE_NAME = "com.google.android.apps.maps";
 	public final static String APP_MAPS_CLASS_NAME = null;
 	
-	public final static String APP_AMAZON_PACKAGE_NAME = "com.amazon.windowshop";
+	public final static String APP_AMAZON_PACKAGE_NAME = "com.amazon.mShop.android";
 	public final static String APP_AMAZON_CLASS_NAME = null;
 	
 	/*

@@ -1,9 +1,12 @@
 package com.android.recapture.ui;
 
+import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
 import com.android.recapture.lib.ApplicationTriggers;
+import com.android.recapture.lib.EmulationScheduler;
+import com.android.recapture.lib.TraceItem;
 
 import android.app.Service;
 import android.content.Intent;
@@ -24,28 +27,25 @@ public class MainService extends Service {
  * another event until the whole event trace has been executed.
  * */
 	
-	private static ApplicationTriggers apt = null;
-	private static Timer timer;
-	private static int counter = 0;
+	private static ArrayList <TraceItem> data;
+	private static EmulationScheduler scheduler;
 	
 	@Override
 	public void onCreate() {
-		timer = new Timer();
-		timer.scheduleAtFixedRate(new TimerTask() {
-
-			@Override
-			public void run() {
-				if (counter % 2 == 0) {
-					apt = new ApplicationTriggers(ApplicationTriggers.APP_GMAIL_PACKAGE_NAME, MainService.this);
-					apt.triggerApplication();
-				}
-				else {
-					apt = new ApplicationTriggers(ApplicationTriggers.APP_AMAZON_PACKAGE_NAME, MainService.this);
-					apt.triggerApplication();
-				}
-				counter += 1;
-				if (counter == 10) this.cancel();
-			}}, 1000, 3000);
+		data = new ArrayList <TraceItem>();
+		
+		TraceItem item1 = new TraceItem("facebook", 5000);
+		TraceItem item2 = new TraceItem("gmail", 5000);
+		TraceItem item3 = new TraceItem("amazon", 5000);
+		TraceItem item4 = new TraceItem("sms", 5000);
+		
+		data.add(item1);
+		data.add(item2);
+		data.add(item3);
+		data.add(item4);
+		
+		scheduler = new EmulationScheduler(data, this);
+		scheduler.run();
 	}
 	
 	@Override

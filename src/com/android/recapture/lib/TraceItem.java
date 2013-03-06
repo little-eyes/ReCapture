@@ -6,8 +6,8 @@ public class TraceItem {
  * existing trace file. Each item will be mapped to an
  * ApplicationEvent later before execute each event.
  * */
-	public static String ApplicationName = null;
-	public static int ApplicationDuration = 0;
+	public String ApplicationName = null;
+	public int ApplicationDuration = 0;
 	
 	public TraceItem(String name, int duration) {
 		ApplicationName = name;

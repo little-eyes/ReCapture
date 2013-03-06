@@ -10,7 +10,8 @@ public class ApplicationEvent {
  * If an app is scheduled, the corresponding event is created. Note
  * that each application's real execution will be in a different
  * thread in order to control the time line (you cannot use wait()
- * in the main thread).
+ * in the main thread). The EmulationScheduler has been threaded,
+ * so we do not consider more threading topics here.
  * */
 	private static Context _ApplicationEnvironment_;
 	private static ApplicationTriggers _ApplicationTrigger_;
