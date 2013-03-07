@@ -15,7 +15,7 @@ public class ApplicationEvent {
  * */
 	private static Context _ApplicationEnvironment_;
 	private static ApplicationTriggers _ApplicationTrigger_;
-	private static TouchGenerator _Toucher_;
+	private static TouchInjector _TouchInjector_;
 	private static SystemMonitor _Monitor_;
 	
 	private static Timer _ScheduleTimer_;
@@ -23,11 +23,11 @@ public class ApplicationEvent {
 	public ApplicationEvent(
 			Context env, 
 			ApplicationTriggers trigger, 
-			TouchGenerator toucher, 
+			TouchInjector injector, 
 			SystemMonitor monitor) {
 		_ApplicationEnvironment_ = env;
 		_ApplicationTrigger_ = trigger;
-		_Toucher_ = toucher;
+		_TouchInjector_ = injector;
 		_Monitor_ = monitor;
 	}
 	
@@ -43,5 +43,6 @@ public class ApplicationEvent {
 	public void execute() {
 		// trigger the event.
 		_ApplicationTrigger_.triggerApplication();
+		_TouchInjector_.dispatchClick();
 	}
 }
