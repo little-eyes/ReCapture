@@ -19,7 +19,7 @@ public class EmulationScheduler implements Runnable {
 	private static Context _ApplicationEnvironment_;
 	private static ApplicationEvent _Event_;
 	private static ApplicationTriggers _Trigger_;
-	private static TouchGenerator _Toucher_;
+	private static TouchInjector _ToucherInjector_;
 	
 	public EmulationScheduler(ArrayList <TraceItem> data, Context env) {
 		_TraceData_ = data;
@@ -35,9 +35,9 @@ public class EmulationScheduler implements Runnable {
 					ApplicationTriggers.getPackageNameByApplicationName(item.ApplicationName), 
 					_ApplicationEnvironment_);
 			
-			_Toucher_ = new TouchGenerator(_ApplicationEnvrionment_);
+			_ToucherInjector_ = new TouchInjector(_ApplicationEnvironment_);
 			// TODO: integrate the monitors and toucher
-			_Event_ = new ApplicationEvent(_ApplicationEnvironment_, _Trigger_, null, null);
+			_Event_ = new ApplicationEvent(_ApplicationEnvironment_, _Trigger_, _ToucherInjector_, null);
 			
 			// execute the event.
 			_Event_.execute();

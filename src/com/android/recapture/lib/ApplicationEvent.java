@@ -42,7 +42,7 @@ public class ApplicationEvent {
 	 * */
 	public void execute() {
 		// trigger the event.
-		_ApplicationTrigger_.triggerApplication();
-		_TouchInjector_.dispatchClick();
+		//_ApplicationTrigger_.triggerApplication();
+		_TouchInjector_.injectHomeButton();
 	}
 }

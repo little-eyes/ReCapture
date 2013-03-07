@@ -2,13 +2,7 @@ package com.android.recapture.lib;
 
 import java.io.IOException;
 
-import android.R;
-import android.app.Activity;
-import android.app.ActivityManager;
 import android.content.Context;
-import android.view.MotionEvent;
-import android.view.View;
-import android.view.WindowManager;
 
 public class TouchInjector {
 /*
@@ -39,7 +33,7 @@ public class TouchInjector {
 	}
 	
 	// click event.
-	public void dispatchClick() {
+	public void injectClick() {
 		try {
 			for (String cmd : ConfigurationManager.TOUCH_SWIPE_RIGHT)
 				Runtime.getRuntime().exec(cmd);
@@ -49,27 +43,62 @@ public class TouchInjector {
 	}
 	
 	// swipe down event.
-	public void dispatchSwipeDown() {
-		
+	public void injectSwipeDown() {
+		try {
+			for (String cmd : ConfigurationManager.TOUCH_SWIPE_DOWN)
+				Runtime.getRuntime().exec(cmd);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	// swipe up event.
-	public void dispatchSwipeUp() {
-		
+	public void injectSwipeUp() {
+		try {
+			for (String cmd : ConfigurationManager.TOUCH_SWIPE_UP)
+				Runtime.getRuntime().exec(cmd);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	// swipe left event.
-	public void dispatchSwipeLeft() {
-		
+	public void injectSwipeLeft() {
+		try {
+			for (String cmd : ConfigurationManager.TOUCH_SWIPE_LEFT)
+				Runtime.getRuntime().exec(cmd);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	// swipe right event.
-	public void dispatchSwipeRight() {
-		
+	public void injectSwipeRight() {
+		try {
+			for (String cmd : ConfigurationManager.TOUCH_SWIPE_RIGHT)
+				Runtime.getRuntime().exec(cmd);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	// click back button.
-	public void dispatchBackButton() {
-		
+	public void injectBackButton() {
+		try {
+			for (String cmd : ConfigurationManager.KEYBOARD_BACK)
+				Runtime.getRuntime().exec(cmd);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	// click home button.
+	public void injectHomeButton() {
+		try {
+			for (String cmd : ConfigurationManager.KEYBOARD_HOME)
+				Runtime.getRuntime().exec(cmd);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 }

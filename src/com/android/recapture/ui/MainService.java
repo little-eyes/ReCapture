@@ -1,15 +1,9 @@
 package com.android.recapture.ui;
 
 import java.util.ArrayList;
-import java.util.Timer;
-import java.util.TimerTask;
-
-import com.android.recapture.lib.ApplicationTriggers;
 import com.android.recapture.lib.EmulationScheduler;
-import com.android.recapture.lib.TouchGenerator;
 import com.android.recapture.lib.TraceItem;
 
-import android.app.Activity;
 import android.app.Service;
 import android.content.Intent;
 import android.os.IBinder;
