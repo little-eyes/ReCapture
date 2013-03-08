@@ -1,8 +1,12 @@
 package com.android.recapture.lib;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 
 import android.content.Context;
+import android.util.Log;
 
 public class TouchInjector {
 /*
@@ -35,6 +39,7 @@ public class TouchInjector {
 	// click event.
 	public void injectClick() {
 		try {
+			Runtime.getRuntime().exec("/system/bin/su");
 			for (String cmd : ConfigurationManager.TOUCH_SWIPE_RIGHT)
 				Runtime.getRuntime().exec(cmd);
 		} catch (IOException e) {
@@ -45,6 +50,7 @@ public class TouchInjector {
 	// swipe down event.
 	public void injectSwipeDown() {
 		try {
+			Runtime.getRuntime().exec("/system/bin/su");
 			for (String cmd : ConfigurationManager.TOUCH_SWIPE_DOWN)
 				Runtime.getRuntime().exec(cmd);
 		} catch (IOException e) {
@@ -55,6 +61,7 @@ public class TouchInjector {
 	// swipe up event.
 	public void injectSwipeUp() {
 		try {
+			Runtime.getRuntime().exec("/system/bin/su");
 			for (String cmd : ConfigurationManager.TOUCH_SWIPE_UP)
 				Runtime.getRuntime().exec(cmd);
 		} catch (IOException e) {
@@ -65,6 +72,7 @@ public class TouchInjector {
 	// swipe left event.
 	public void injectSwipeLeft() {
 		try {
+			Runtime.getRuntime().exec("/system/bin/su");
 			for (String cmd : ConfigurationManager.TOUCH_SWIPE_LEFT)
 				Runtime.getRuntime().exec(cmd);
 		} catch (IOException e) {
@@ -75,6 +83,7 @@ public class TouchInjector {
 	// swipe right event.
 	public void injectSwipeRight() {
 		try {
+			Runtime.getRuntime().exec("/system/bin/su");
 			for (String cmd : ConfigurationManager.TOUCH_SWIPE_RIGHT)
 				Runtime.getRuntime().exec(cmd);
 		} catch (IOException e) {
@@ -85,6 +94,7 @@ public class TouchInjector {
 	// click back button.
 	public void injectBackButton() {
 		try {
+			Runtime.getRuntime().exec("/system/bin/su");
 			for (String cmd : ConfigurationManager.KEYBOARD_BACK)
 				Runtime.getRuntime().exec(cmd);
 		} catch (IOException e) {
@@ -95,8 +105,24 @@ public class TouchInjector {
 	// click home button.
 	public void injectHomeButton() {
 		try {
+			Runtime.getRuntime().exec("/system/bin/su");
 			for (String cmd : ConfigurationManager.KEYBOARD_HOME)
 				Runtime.getRuntime().exec(cmd);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	// It has been tested success on Mar 7, 2013.
+	@Deprecated
+	public void commandTest() {
+		try {
+			Process p = Runtime.getRuntime().exec("ls");
+			BufferedReader br = new BufferedReader(new InputStreamReader(p.getInputStream()));
+			String line = "";
+			while ((line = br.readLine()) != null) {
+				Log.i("ReCapture", line);
+			}
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

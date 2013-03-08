@@ -44,5 +44,6 @@ public class ApplicationEvent {
 		// trigger the event.
 		//_ApplicationTrigger_.triggerApplication();
 		_TouchInjector_.injectHomeButton();
+		//_TouchInjector_.commandTest();
 	}
 }
