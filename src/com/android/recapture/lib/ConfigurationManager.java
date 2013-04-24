@@ -1,11 +1,13 @@
 package com.android.recapture.lib;
 
+import android.os.Environment;
+
 public class ConfigurationManager {
 
 	/*
 	 * The application event execution configuration.
 	 * */
-	public static final int APP_EVENT_SLEEP_DURATION = 20000; // sleep 20 seconds
+	public static final int APP_EVENT_SLEEP_DURATION = 10000; // sleep 20 seconds
 	public static final int APP_EVENT_CLICK_DURATION = 5000; // random click 5 seconds
 	public static final int APP_EVENT_CLICK_GAP = 1000; // every 1 second issue a click
 	
@@ -89,4 +91,16 @@ public class ConfigurationManager {
 		"/system/bin/sendevent /dev/input/event0 0003 0000 000000fd",
 		"/system/bin/sendevent /dev/input/event0 0003 0001 000002f4"
 	};
+	
+	/*
+	 * File and data directory.
+	 * */
+	public static final String TRACE_PATH = Environment.getExternalStorageDirectory() + "/ReCapture/trace";
+	public static final String DATA_PATH = Environment.getExternalStorageDirectory() + "/ReCapture/data";
+	
+	/*
+	 * Communication Host and Port
+	 * */
+	public static String MASTER_HOST = "192.168.10.144";
+	public static int MASTER_PORT = 15100;
 }

@@ -1,11 +1,18 @@
 package com.android.recapture.ui;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
+
+import com.android.recapture.lib.ConfigurationManager;
 import com.android.recapture.lib.EmulationScheduler;
 import com.android.recapture.lib.TraceItem;
 
 import android.app.Service;
 import android.content.Intent;
+import android.os.Environment;
 import android.os.IBinder;
 
 public class MainService extends Service {
@@ -28,20 +35,12 @@ public class MainService extends Service {
 	
 	@Override
 	public void onCreate() {
-		data = new ArrayList <TraceItem>();
-		
-		TraceItem item1 = new TraceItem("facebook", 5000);
-		TraceItem item2 = new TraceItem("gmail", 5000);
-		TraceItem item3 = new TraceItem("amazon", 5000);
-		TraceItem item4 = new TraceItem("sms", 5000);
-		
-		data.add(item1);
-		data.add(item2);
-		data.add(item3);
-		data.add(item4);
-		
-		scheduler = new EmulationScheduler(data, this);
-		scheduler.run();
+		initializeDataDirectory();
+		data = loadTraceData();
+		if (data != null) {
+			scheduler = new EmulationScheduler(data, this);
+			scheduler.run();
+		}
 	}
 	
 	@Override
@@ -55,4 +54,44 @@ public class MainService extends Service {
 		return null;
 	}
 
+	private void initializeDataDirectory() {
+		File SdCard = Environment.getExternalStorageDirectory();
+		// create trace directory.
+		File f = new File(ConfigurationManager.TRACE_PATH);
+		if (!f.exists()) {
+			try {
+				f.mkdirs();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		// create data directory.
+		f = new File(ConfigurationManager.DATA_PATH);
+		if (!f.exists()) {
+			try {
+				f.mkdirs();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	private ArrayList <TraceItem> loadTraceData() {
+		String DataURI = ConfigurationManager.TRACE_PATH + "/sample.trace";
+		ArrayList <TraceItem> data = new ArrayList <TraceItem>();
+		try {
+			BufferedReader reader = new BufferedReader(new FileReader(new File(DataURI)));
+			String line = "";
+			while ((line = reader.readLine()) != null) {
+				if (line == "") break;
+				String [] elements = line.split(",");
+				TraceItem item = new TraceItem(elements[0], Integer.valueOf(elements[1]));
+				data.add(item);
+			}
+			return data;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
 }

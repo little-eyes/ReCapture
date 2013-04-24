@@ -14,9 +14,9 @@ public class ApplicationEvent {
  * so we do not consider more threading topics here.
  * */
 	private static Context _ApplicationEnvironment_;
-	private static ApplicationTriggers _ApplicationTrigger_;
-	private static TouchInjector _TouchInjector_;
-	private static SystemMonitor _Monitor_;
+	private ApplicationTriggers _ApplicationTrigger_;
+	private TouchInjector _TouchInjector_;
+	private SystemMonitor _Monitor_;
 	
 	private static Timer _ScheduleTimer_;
 	
@@ -42,8 +42,10 @@ public class ApplicationEvent {
 	 * */
 	public void execute() {
 		// trigger the event.
-		//_ApplicationTrigger_.triggerApplication();
-		_TouchInjector_.injectHomeButton();
+		_ApplicationTrigger_.triggerApplication();
+		//_TouchInjector_.injectHomeButton();
 		//_TouchInjector_.commandTest();
+		TagHook hook = new TagHook(_ApplicationTrigger_.getPackageName());
+		hook.registerHook();
 	}
 }

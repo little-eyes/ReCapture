@@ -37,8 +37,8 @@ public class ApplicationTriggers {
 	/*
 	 * Variable stores which application this trigger is for.
 	 * */
-	private static String _ApplicationPackageName_;
-	private static String _ApplicationClassName_;
+	private String _ApplicationPackageName_;
+	private String _ApplicationClassName_;
 	private static Context _AppEnvironment_;
 	
 	public ApplicationTriggers(String pkgName, String className, Context context) {
@@ -66,18 +66,23 @@ public class ApplicationTriggers {
 		else {
 			Intent intent = _AppEnvironment_.getPackageManager().getLaunchIntentForPackage(_ApplicationPackageName_);
 			_AppEnvironment_.startActivity(intent);
-			Log.d("ReCapture", "trigger app with package name only");
+			Log.d("ReCapture", "trigger app with package name only => " + _ApplicationPackageName_);
 		}
 	}
 	
+	public String getPackageName() {
+		return _ApplicationPackageName_;
+	}
+	
 	public static String getPackageNameByApplicationName(String name) {
-		if (name == ConfigurationManager.APP_AMAZON) return APP_AMAZON_PACKAGE_NAME;
-		if (name == ConfigurationManager.APP_FACEBOOK) return APP_FACEBOOK_PACKAGE_NAME;
-		if (name == ConfigurationManager.APP_GMAIL) return APP_GMAIL_PACKAGE_NAME;
-		if (name == ConfigurationManager.APP_MAPS) return APP_MAPS_PACKAGE_NAME;
-		if (name == ConfigurationManager.APP_SMS) return APP_SMS_PACKAGE_NAME;
-		if (name == ConfigurationManager.APP_TELEPHONE) return APP_PHONE_PACKAGE_NAME;
-		if (name == ConfigurationManager.APP_TWITTER) return APP_TWITTER_PACKAGE_NAME;
+		System.out.println(name);
+		if (name.equals(ConfigurationManager.APP_AMAZON)) return APP_AMAZON_PACKAGE_NAME;
+		if (name.equals(ConfigurationManager.APP_FACEBOOK)) return APP_FACEBOOK_PACKAGE_NAME;
+		if (name.equals(ConfigurationManager.APP_GMAIL)) return APP_GMAIL_PACKAGE_NAME;
+		if (name.equals(ConfigurationManager.APP_MAPS)) return APP_MAPS_PACKAGE_NAME;
+		if (name.equals(ConfigurationManager.APP_SMS)) return APP_SMS_PACKAGE_NAME;
+		if (name.equals(ConfigurationManager.APP_TELEPHONE)) return APP_PHONE_PACKAGE_NAME;
+		if (name.equals(ConfigurationManager.APP_TWITTER)) return APP_TWITTER_PACKAGE_NAME;
 		return null;
 	}
 }

@@ -15,11 +15,11 @@ public class EmulationScheduler implements Runnable {
  * time slot for different app.
  * */
 	
-	private static ArrayList <TraceItem> _TraceData_;
+	private ArrayList <TraceItem> _TraceData_;
 	private static Context _ApplicationEnvironment_;
-	private static ApplicationEvent _Event_;
-	private static ApplicationTriggers _Trigger_;
-	private static TouchInjector _ToucherInjector_;
+	private ApplicationEvent _Event_;
+	private ApplicationTriggers _Trigger_;
+	private TouchInjector _ToucherInjector_;
 	
 	public EmulationScheduler(ArrayList <TraceItem> data, Context env) {
 		_TraceData_ = data;
@@ -28,7 +28,9 @@ public class EmulationScheduler implements Runnable {
 
 	@Override
 	public void run() {
-		for (TraceItem item : _TraceData_) {
+		for (int i = 0; i < _TraceData_.size(); ++i) {
+			TraceItem item = _TraceData_.get(i);
+			if (item == null) break;
 			// prepare the event.
 			Log.d("ReCapture", item.ApplicationName);
 			_Trigger_ = new ApplicationTriggers(
