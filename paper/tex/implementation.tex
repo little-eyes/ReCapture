@@ -1,0 +1,46 @@
+\section{System Implementation} \label{sec:implementation}
+We choose Android OS as the desired smartphone platform for the implementation, and we use several Nexus S smartphones as the hardware. The ReCapture framework is separated into two parts: on-device component and central master component. The existence of on-device component is an Android Service running at the background of the system. It has to be a Service because the screen will be preempted by various different app scheduled by the on-device component.
+
+Specifically, the on-device component has the following Java packages needed in the system:
+\begin{itemize}
+\item \emph{com.android.recapture.builtin}. This package is the place we used to register and maintain the performance monitor plugin. Each performance monitor module is presented as an Android Service which independently record their metrics. The implementations is different from the all-in-one style because the separate monitor Service gives the developer the largest flexibility to plugin their own metrics.
+
+\item \emph{com.android.recpature.lib}. This library package is the core of the ReCapture framework on each device. It contains critical components in the design diagram, such as \emph{Application Event}, \emph{Application Trigger}, \emph{Emulation Scheduler}, \emph{Activity Hook}. The application event abstract the class of an activity event which contains its corresponding application trigger and activity hook. The application trigger is used to bring the app to the front screen, and the activity hook is used to send a message to the central master where the related screen actions will be issued.
+
+Finally, the emulation scheduler is the central controller in the smartphone where every application event is scheduled one by one for a certain duration. Additionally, the Configuration Manager is the place for the global configuration for the on-device component, where a developer can define the application execution parameters, canonical application name, and data output directory, etc.
+
+\item\emph{com.android.recapture.ui}. This package is mainly about the main entrance of the ReCapture framework. A developer can implement any UI frames in this package if necessary, but we default package do not include any UI framework because the UI activity will be preempted by other apps sooner or later. In addition, the MainService is the main entrace which used to activate the emulation scheduler and other monitor plugins.
+\end{itemize}
+
+Note that the activity hook message contains the device's physical ID and current active package. We use the smartphone's device serial number as the physical unique ID because it is identical to the device ID recognized in ADB shell. So we do not need an additional unique ID map from one ID system to another.
+
+On the other hand, the central master component is implemented in the Python. Note that the interactions between the on-device component and the central master are two parts. One is the interaction from the application hook to the central master, which is used to register the current executing app and require the screen actions. Even though the smartphones are connected with the central master with a USB cable, we do not use the standard USB communication at this stage. There are multiple USB connected devices and each device may runs several virtual machines, so the differentiation from USB port to another is complicated. Therefore, we choose a simple TCP connection to bridge the connection from application hook to the central master. Consider the possibility that the two or more screen action requests may come concurrently, the central master's front-end is actually a multi-threaded TCP server which can handle the requests simultaneously.
+
+For the other side of the communication, the central master usually issue the screen actions through the USB cable because this feature requires the Android SDK tool \emph{monkey}'s help. The Android monkey tool provides the ability for the developer to define its own screen action workflow through its script language. A sample language is shown in the Table~\ref{tab:script}. This script's task is to start the \emph{com.android.recapture.ui} package and continuously press different types of keys. Similarly, we the ReCapture framework will prepare each activity event a script based on their usage behavior studies, then the commands will be sent to the device one by one via the USB cable by using ADB commandline automatically.
+
+\begin{table}
+\centering
+\caption{The sample screen action script}
+\begin{tabular}{|l|}\hline
+\# Start of Script \\
+type= user\\
+count= 49\\
+speed= 1.0\\
+start data $>>$\\
+LaunchActivity(com.android.recapture.ui)\\
+\# 3120021258\\
+DispatchPress(KEYCODE\_3)\\
+UserWait(200)\\
+DispatchPress(KEYCODE\_1)\\
+UserWait(200)\\
+DispatchPress(KEYCODE\_3)\\
+UserWait(200)\\
+DispatchPress(KEYCODE\_5)\\
+UserWait(200)\\
+DispatchPress(KEYCODE\_0)\\
+UserWait(200)\\
+DispatchPress(KEYCODE\_2)\\
+UserWait(200)\\\hline
+\end{tabular}
+\label{tab:script}
+\end{table}
