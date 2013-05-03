@@ -1,5 +1,5 @@
 \section{System Implementation} \label{sec:implementation}
-We choose Android OS as the desired smartphone platform for the implementation, and we use several Nexus S smartphones as the hardware. The ReCapture framework is separated into two parts: on-device component and central master component. The existence of on-device component is an Android Service running at the background of the system. It has to be a Service because the screen will be preempted by various different app scheduled by the on-device component.
+We choose Android OS as the desired smartphone platform for the implementation\footnote{Source code is hosted on Github: https://github.com/little-eyes/ReCapture.git}, and we use several Nexus S smartphones as the hardware. The ReCapture framework is separated into two parts: on-device component and central master component. The existence of on-device component is an Android Service running at the background of the system. It has to be a Service because the screen will be preempted by various different app scheduled by the on-device component.
 
 Specifically, the on-device component has the following Java packages needed in the system:
 \begin{itemize}
