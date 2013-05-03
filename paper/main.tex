@@ -1,0 +1,58 @@
+\documentclass[10pt,conference]{IEEEtran}
+\pagestyle{headings}
+
+\usepackage{cite}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{algorithm}
+\usepackage{algorithmicx}
+\usepackage{algpseudocode}
+\usepackage{subfig}
+\usepackage{url}
+\usepackage{booktabs}
+\usepackage{listings}
+
+\renewcommand{\algorithmicrequire}{\textbf{Input:}}
+\renewcommand{\algorithmicensure}{\textbf{Output:}}
+
+% correct bad hyphenation here
+\hyphenation{op-tical net-works semi-conduc-tor}
+
+
+\begin{document}
+%
+% paper title
+% can use linebreaks \\ within to get better formatting as desired
+\title{ReCapture: A Scalable Testbed for Mobile System Evaluations}
+
+\author{
+\IEEEauthorblockN{Jilong Liao}
+\IEEEauthorblockA{Department of Electrical Engineering and Computer Science\\
+University of Tennessee, Knoxville TN, 37996\\
+Email: jliao2@utk.edu}
+}
+
+\maketitle
+
+
+\begin{abstract}
+Smartphone related research has been very active in recent years. One important reason is that more and more people tend to use the smart mobile devices which makes it a perfect research tool to study networking, social network and even psychobiology. Besides, people in the system area are also interested in mobile device's performance because it is battery and storage constraint. When researchers want to evaluate their research ideas, e.g. the 3G/4G-LTE network optimization, they have to conduct some large scale evaluations to prove the idea. Unfortunately, this type of evaluation turns out to be a big challenge to the researchers. One obvious reason is that we do not have enough human force and research fundings. So the alternative approach: \emph{small-scale evaluation plus large-scale simulation} becomes the standard methodology in recent year's paper, which definitely is not satisfactory for research. In this paper, we resolve the challenge by adopting the idea of \emph{replay} and \emph{virtualization} which takes the real and easy-to-get usage traces to replay the usage runtime automatically and virtualize the device to scale up the runtime so that the evaluation could be more reliable. We design and implement the system on the Android smartphones, then we evaluate the system through some basic case studies. The results show the system has the ability to reduce the experiment's challenges while make the experiment's result stronger.
+\end{abstract}
+
+\IEEEpeerreviewmaketitle
+
+\input{tex/introduction}
+\input{tex/relatedwork}
+\input{tex/design}
+\input{tex/implementation}
+\input{tex/evaluation}
+\input{tex/discussion}
+\input{tex/conclusion}
+
+{\footnotesize
+\bibliographystyle{IEEEtran}
+\bibliography{reference}}  % sigproc.bib is the name of the Bibliography in this case
+
+\end{document}
+
+
