@@ -1,12 +1,12 @@
 \section{ReCapture Design}\label{sec:design}
 The ultimate goal of ReCapture is to give a researcher or developer the capability to run a large scale evaluation about smartphones automatically. Therefore, the design of ReCapture needs the following criterion.
 \begin{itemize}
-\item Generality. ReCapture should provide the simple and unified interface for the researches or developers that whatever they want to evaluate on this testbed, they can use the same tool and same APIs.
+\item Generalness. ReCapture should provide the simple and unified interface for the researches or developers that whatever they want to evaluate on this testbed, they can use the same tool and the same APIs.
 \item Flexibility. It requires ReCapture to give the chance for the testbed's input, execution pattern and performance monitoring.
 \end{itemize}
 
 \subsection{Core System}
-Fig.~\ref{fig:big} shows the big picture of ReCapture. As we can see, we have a central master to organize and schedule testbed and the mobile devices are the testbed to automatically execute the activity log. The central master will load the existing activity log for each device, once the smartphone receive the log activity completely it starts executing the activity script one by one. Once the smartphone pull an app in the foreground screen, the central master will be informed which the central master will start sending screen actions to the corresponding smartphone. The screen action script is flexible and can be defined by the developers themselves.
+Fig.~\ref{fig:big} shows the big picture of ReCapture. As we can see, we have a central master to organize and schedule testbed and the mobile devices are the testbed to automatically execute the activity log. The central master will load the existing activity log for each device, once the smartphone receive the log activity completely it starts executing the activity script one by one. After the smartphone pull an app in the foreground screen, the central master will be informed which the central master will start sending screen actions to the corresponding smartphone. The screen action script is flexible and can be defined by the developers themselves.
 
 \begin{figure}
 \centering
@@ -15,7 +15,7 @@ Fig.~\ref{fig:big} shows the big picture of ReCapture. As we can see, we have a 
 \label{fig:big}
 \end{figure}
 
-The system architecture is shown in Fig.~\ref{fig:sys}. As is shown, two separate parts are in the system's core architecture: device side and central master side. In the device side, two lightweight components support the runtime environment of the testbed. One is the \emph{scheduler} and the other is \emph{app trigger}. The scheduler takes the activity log (or data trace) received from the central master, then it arranges the execution sequence based on the activity log. For each of the activity event, it starts a app trigger which brings the dedicated app into the screen front. As soon as the the the app is running, the scheduler will send a message to the central master, which will start issuing the screen actions to the device.
+The system architecture is shown in Fig.~\ref{fig:sys}. As is shown, two separate parts are in the system's core architecture: device side and central master side. In the device side, two lightweight components support the runtime environment of the testbed. One is the \emph{scheduler} and the other is \emph{app trigger}. The scheduler takes the activity log (or data trace) received from the central master, then it arranges the execution sequence based on the activity log. For each of the activity event, it starts an app trigger which brings the dedicated app into the screen front. As soon as the the the app is running, the scheduler will send a message to the central master, which will start issuing the screen actions to the device.
 
 Besides the major components, the performance monitor module is presented as a plugin which is flexible to be added and removed. For example, if the developer is interested in the energy consumption of the operating system, he can plugin the energy profiling module into this component. We do not provide identical performance monitoring module inside the ReCapture's framework because 1) we do not want to restrict the extendibility of the system by hard-code everything; 2) we do not want to waste the operating system's resource if the developer is not interested in some monitor like dynamic CPU cost.
 
