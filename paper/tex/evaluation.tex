@@ -23,7 +23,7 @@ OS & 4.1.2 (Jelly Bean) \\\bottomrule
 \label{fig:exp}
 \end{figure}
 
-We prepare a sample activity log in the Table~\ref{tab:log}, which we repeat the execution of facebook, gmail, twitter and amazon app and each of the app will last $5$ seconds. After a round of execution, we collect the screen actions issued to the devices and the statistics is shown in Table~\ref{tab:screen}. As we can see, the most active screen operations are navigations, touch and motion. If you are using facebook, you may swipe up and down to see new feeds or use the navigations to jump into to chat. It is also frequent that the you may see a picture and you click the picture, then you change the orientation of the phone to see the picture, so the motions activities also introduces about $10$ percent of the total screen actions. Further more, Fig.~\ref{fig:master} records a screen snapshot of the central master. Once the master receives activity hook message, it will start generate the screen action code to the device.
+We prepare a sample activity log in the Table~\ref{tab:log}, which we repeat the execution of facebook, gmail, twitter and amazon app and each of the app will last $5$ seconds. After a round of execution, we collect the screen actions issued to the devices and the statistics is shown in Table~\ref{tab:screen}. As we can see, the most active screen operations are navigations, touch and motion. If you are using facebook, you may swipe up and down to see new feeds or use the navigations to jump into to chat. It is also frequent that you may see a picture and you click the picture, then you change the orientation of the phone to see the picture, so the motions activities also introduces about $10$ percent of the total screen actions. Further more, Fig.~\ref{fig:master} records a screen snapshot of the central master. Once the master receives activity hook message, it will start generating the screen action code to the device.
 
 \begin{figure*}
 \centering
@@ -63,7 +63,7 @@ Others & 10\% \\\bottomrule
 \label{tab:screen}
 \end{table}
 
-On the other hand, we are interested in the central master's capability to receive large amount of screen action request. It is important because the central master could become the bottleneck of the system in a large scale environment. In this experiment, we test how well the central master can answer the request from the device by sending $1,000,000$ request in multiple thread concurrently to the central master. Fig.~\ref{fig:time} shows the results, as we can see, $90\%$ of the request can get response within $2$ms, so the delay of the system is very small. It is safe to say that the central master should not become a bottleneck of the whole system.
+On the other hand, we are interested in the central master's capability to receive large amount of screen action requests. It is important because the central master could become the bottleneck of the system in a large scale environment. In this experiment, we test how well the central master can answer the request from the device by sending $1,000,000$ request in multiple thread concurrently to the central master. Fig.~\ref{fig:time} shows the results, as we can see, $90\%$ of the request can get response within $2$ms, so the delay of the system is very small. It is safe to say that the central master should not become a bottleneck of the whole system.
 
 \begin{figure}
 \includegraphics[width=0.45\textwidth]{figures/time.pdf}
